@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+            
+        }
+        .main{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        form{
+            height: 60%;
+            width: 50%;
+            border: 2px solid black;
+            border-radius: 20px;
+            background-color: rgba(83, 66, 66, 0.479);
+        }
+        .user{
+            width: 400px;
+            height: 40px;
+            border-radius: 20px;
+        }
+        label{
+            font-size: xx-large;
+        }
+        .submit{
+            width: 20%;
+            height: 10%;
+            border-radius: 20px;
+            
+        }
+        .submit:hover{
+            background-color: greenyellow;
+            
+        }
+        .label:hover{
+            background-color: greenyellow;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+    <form action="submit.php" method="post">
+        <label>Name:</label><br>
+        <input class="user" type="text" name="username" placeholder="Username ..."><br>
+        <input type="submit" class="submit" name="Submit"><br>
+    </form></div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Custom Cursor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Gulroy', sans-serif;
+      color: white;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    .cursor {
+      height: 20px;
+      width: 20px;
+      background-color: white;
+      border-radius: 50%;
+      position: fixed;
+      mix-blend-mode: difference;
+      pointer-events: none;
+      z-index: 1000;
+      transition: height 0.2s ease, width 0.2s ease;
+    }
+
+    #main {
+      height: 100%;
+      width: 100%;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 9vw;
+      font-weight: 900;
+    }
+
+    img {
+      height: 70vh;
+      width: 70vw;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div id="main">
+    <div class="cursor"></div>
+    <img src="https://img.freepik.com/premium-photo/very-cool-peaceful_1026950-106072.jpg" alt="cool image" />
+  </div>
+
+  <script>
+    const main = document.querySelector("#main");
+    const cursor = document.querySelector(".cursor");
+    const image = document.querySelector("img");
+
+    main.addEventListener("mousemove", function (e) {
+      cursor.style.left = e.x + "px";
+      cursor.style.top = e.y + "px";
+    });
+
+    image.addEventListener("mouseenter", function () {
+      cursor.style.height = "40px";
+      cursor.style.width = "40px";
+    });
+
+    image.addEventListener("mouseleave", function () {
+      cursor.style.height = "20px";
+      cursor.style.width = "20px";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block title %}Blog Posts{% endblock %}
+{% block content %}
+<h2 class="mb-4">All Blog Posts</h2>
+<div class="list-group">
+    {% for post in posts %}
+    <a href="{% url 'post_detail' post.pk %}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ post.title }}</h5>
+            <small>{{ post.created_at|date:"M d, Y H:i" }}</small>
+        </div>
+        <p class="mb-1 text-muted">{{ post.content|truncatewords:20 }}</p>
+    </a>
+    {% empty %}
+    <p>No posts available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

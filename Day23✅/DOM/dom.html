@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100vh;
+      width: 100vw;
+      background-color: black;
+      color: white;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    button {
+      height: 50px;
+      width: 100px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>This is Heading</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <button id="colorBtn">Click Here</button>
+  </div>
+
+  <script>
+    var heading = document.querySelector("h1");
+    var para = document.querySelector("p");
+    var button = document.querySelector("#colorBtn");
+    var main = document.querySelector(".container");
+
+    button.onclick = function () {
+      // Toggle colors on click
+      heading.style.color = "yellow";
+      para.style.color = "lightgreen";
+      main.style.backgroundColor = "darkblue";
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Full Concepts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    #main {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .item {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .highlight {
+      background-color: yellow;
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="main">
+    <h1 id="title">DOM Full Example</h1>
+    <p class="description">This is a complete DOM manipulation example.</p>
+
+    <input type="text" id="newItemInput" placeholder="Add new item">
+    <button id="addItemBtn">Add Item</button>
+
+    <ul id="itemList">
+      <li class="item">Item 1 <button class="removeBtn">Remove</button></li>
+      <li class="item">Item 2 <button class="removeBtn">Remove</button></li>
+    </ul>
+
+    <button id="toggleListBtn">Toggle List</button>
+    <button id="changeTitleBtn">Change Title</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
