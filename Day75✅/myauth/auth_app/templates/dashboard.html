@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0a0d14 0%, #1c1f2e 100%);
+  min-height: 100vh;
+  padding: 2rem;
+  color: #fff;
+}
+
+.trading-dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 1.5rem;
+  height: calc(100vh - 4rem);
+}
+
+.market-overview {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.market-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 10px;
+  flex: 1;
+  min-width: 250px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.market-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.market-card .symbol {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.market-card .symbol i {
+  font-size: 24px;
+  margin-right: 10px;
+  color: var(--accent-color);
+}
+
+.market-card .symbol span {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.market-card .price {
+  margin-bottom: 15px;
+}
+
+.market-card .price h3 {
+  font-size: 24px;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.market-card .change {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.market-card .change.positive {
+  color: #00ff7f;
+}
+
+.market-card .change.negative {
+  color: #ff4538;
+}
+
+.market-card .sparkline {
+  height: 50px;
+  width: 100%;
+}
+
+.market-card .sparkline svg {
+  width: 100%;
+  height: 100%;
+}
+
+.market-card .sparkline .area {
+  fill: url(#sparklineGradient1);
+}
+
+.market-card.rising .sparkline .area {
+  fill: url(#sparklineGradient1);
+}
+
+.market-card.falling .sparkline .area {
+  fill: url(#sparklineGradient2);
+}
+
+.market-card .sparkline .line {
+  fill: none;
+  stroke: var(--accent-color);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.market-card.rising .sparkline .line {
+  stroke: #00ff7f;
+}
+
+.market-card.falling .sparkline .line {
+  stroke: #ff4538;
+}
+
+.market-card .sparkline .dots circle {
+  fill: var(--background-color);
+  stroke: var(--accent-color);
+  stroke-width: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.market-card.rising .sparkline .dots circle {
+  stroke: #00ff7f;
+}
+
+.market-card.falling .sparkline .dots circle {
+  stroke: #ff4538;
+}
+
+.market-card .sparkline:hover .dots circle {
+  opacity: 1;
+}
+
+.main-chart {
+  grid-column: 1 / 2;
+  background: rgba(13, 17, 28, 0.8);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.chart-title h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  color: #fff;
+}
+
+.timeframe {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+}
+
+.chart-controls {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.25rem;
+  border-radius: 10px;
+  z-index: 3;
+  position: relative;
+}
+
+.time-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.time-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.time-btn.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.chart-container {
+  height: 400px;
+  background: rgba(13, 17, 28, 0.6);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem;
+}
+
+.chart-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.chart-y-axis {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.chart-x-axis {
+  position: absolute;
+  left: 1rem;
+  right: 4rem;
+  bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.chart-line {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  bottom: 2rem;
+  z-index: 1;
+}
+
+.chart-line svg {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-stroke {
+  fill: none;
+  stroke: #00ff7f;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.chart-area {
+  fill: url(#chartGradient);
+  stroke: none;
+}
+
+.price-points circle {
+  fill: #00ff7f;
+  stroke: rgba(13, 17, 28, 0.8);
+  stroke-width: 2;
+  transition: r 0.2s ease;
+}
+
+.price-points circle:hover {
+  r: 6;
+  cursor: pointer;
+}
+
+.chart-container:hover .chart-stroke {
+  stroke-width: 2.5;
+}
+
+.chart-container:hover .price-points circle {
+  r: 5;
+}
+
+.trading-panel {
+  grid-column: 2 / 3;
+  background: rgba(13, 17, 28, 0.8);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.order-types {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.order-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.order-btn:hover,
+.order-btn.active {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.order-btn i {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.input-group {
+  background: rgba(13, 17, 28, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.input-group input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  width: 100%;
+  outline: none;
+}
+
+.input-group input::-webkit-inner-spin-button,
+.input-group input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-group input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.max-btn,
+.currency {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  padding-left: 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.max-btn:hover {
+  color: #fff;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.buy-btn,
+.sell-btn {
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.buy-btn {
+  background: linear-gradient(135deg, #00d672 0%, #00a85a 100%);
+  box-shadow: 0 4px 15px rgba(0, 214, 114, 0.2);
+}
+
+.sell-btn {
+  background: linear-gradient(135deg, #ff453a 0%, #cc1b1b 100%);
+  box-shadow: 0 4px 15px rgba(255, 69, 58, 0.2);
+}
+
+.buy-btn:hover,
+.sell-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.market-news {
+  grid-column: 1 / -1;
+  background: rgba(13, 17, 28, 0.8);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.market-news h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.news-item {
+  padding: 1rem;
+  background: rgba(13, 17, 28, 0.6);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.news-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(5px);
+}
+
+.news-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.news-time {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.news-item p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.impact {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.impact.high {
+  color: #ff453a;
+  background: rgba(255, 69, 58, 0.1);
+}
+
+.impact.medium {
+  color: #ffd60a;
+  background: rgba(255, 214, 10, 0.1);
+}
+
+@media (max-width: 1200px) {
+  .trading-dashboard {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .main-chart,
+  .trading-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .trading-dashboard {
+    height: auto;
+    gap: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .market-overview {
+    gap: 0.75rem;
+  }
+
+  .market-card {
+    padding: 0.75rem;
+    margin: 0;
+  }
+
+  .chart-container {
+    height: 250px;
+    padding: 0.75rem;
+  }
+
+  .trading-panel,
+  .market-news,
+  .main-chart {
+    padding: 1rem;
+  }
+
+  .order-types {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .order-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .action-buttons {
+    gap: 0.75rem;
+  }
+
+  .buy-btn,
+  .sell-btn {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .news-item {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0.25rem;
+  }
+
+  .trading-dashboard {
+    gap: 0.5rem;
+  }
+
+  .market-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: 200px;
+  }
+
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+       <h1>Wellcome {{request.user.username}}</h1>
+       <a href='{% url "logout" %}'>Logout</a>
+
+<div class="trading-dashboard">
+  <div class="market-overview">
+    <div class="market-card rising">
+      <div class="symbol">
+        <i class="fab fa-bitcoin"></i>
+        <span>BTC/USD</span>
+      </div>
+      <div class="price">
+        <h3>$42,850.20</h3>
+        <span class="change positive">+2.34%</span>
+      </div>
+      <div class="sparkline">
+        <svg viewBox="0 0 200 50" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="sparklineGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:rgba(0,255,127,0.2)" />
+              <stop offset="100%" style="stop-color:rgba(0,255,127,0)" />
+            </linearGradient>
+          </defs>
+          <path class="area" d="M0 35 L20 32 L40 34 L60 28 L80 25 L100 22 L120 24 L140 20 L160 22 L180 18 L200 20 L200 50 L0 50 Z"></path>
+          <path class="line" d="M0 35 L20 32 L40 34 L60 28 L80 25 L100 22 L120 24 L140 20 L160 22 L180 18 L200 20"></path>
+          <g class="dots">
+            <circle cx="0" cy="35" r="2"></circle>
+            <circle cx="20" cy="32" r="2"></circle>
+            <circle cx="40" cy="34" r="2"></circle>
+            <circle cx="60" cy="28" r="2"></circle>
+            <circle cx="80" cy="25" r="2"></circle>
+            <circle cx="100" cy="22" r="2"></circle>
+            <circle cx="120" cy="24" r="2"></circle>
+            <circle cx="140" cy="20" r="2"></circle>
+            <circle cx="160" cy="22" r="2"></circle>
+            <circle cx="180" cy="18" r="2"></circle>
+            <circle cx="200" cy="20" r="2"></circle>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="market-card falling">
+      <div class="symbol">
+        <i class="fas fa-euro-sign"></i>
+        <span>EUR/USD</span>
+      </div>
+      <div class="price">
+        <h3>1.0924</h3>
+        <span class="change negative">-0.15%</span>
+      </div>
+      <div class="sparkline">
+        <svg viewBox="0 0 200 50" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="sparklineGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:rgba(255,69,58,0.2)" />
+              <stop offset="100%" style="stop-color:rgba(255,69,58,0)" />
+            </linearGradient>
+          </defs>
+          <path class="area" d="M0 25 L20 28 L40 32 L60 29 L80 33 L100 35 L120 31 L140 34 L160 30 L180 33 L200 31 L200 50 L0 50 Z"></path>
+          <path class="line" d="M0 25 L20 28 L40 32 L60 29 L80 33 L100 35 L120 31 L140 34 L160 30 L180 33 L200 31"></path>
+          <g class="dots">
+            <circle cx="0" cy="25" r="2"></circle>
+            <circle cx="20" cy="28" r="2"></circle>
+            <circle cx="40" cy="32" r="2"></circle>
+            <circle cx="60" cy="29" r="2"></circle>
+            <circle cx="80" cy="33" r="2"></circle>
+            <circle cx="100" cy="35" r="2"></circle>
+            <circle cx="120" cy="31" r="2"></circle>
+            <circle cx="140" cy="34" r="2"></circle>
+            <circle cx="160" cy="30" r="2"></circle>
+            <circle cx="180" cy="33" r="2"></circle>
+            <circle cx="200" cy="31" r="2"></circle>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="market-card rising">
+      <div class="symbol">
+        <i class="fas fa-yen-sign"></i>
+        <span>USD/JPY</span>
+      </div>
+      <div class="price">
+        <h3>148.92</h3>
+        <span class="change positive">+0.45%</span>
+      </div>
+      <div class="sparkline">
+        <svg viewBox="0 0 200 50" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="sparklineGradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:rgba(0,255,127,0.2)" />
+              <stop offset="100%" style="stop-color:rgba(0,255,127,0)" />
+            </linearGradient>
+          </defs>
+          <path class="area" d="M0 30 L20 28 L40 25 L60 29 L80 26 L100 23 L120 27 L140 24 L160 21 L180 25 L200 22 L200 50 L0 50 Z"></path>
+          <path class="line" d="M0 30 L20 28 L40 25 L60 29 L80 26 L100 23 L120 27 L140 24 L160 21 L180 25 L200 22"></path>
+          <g class="dots">
+            <circle cx="0" cy="30" r="2"></circle>
+            <circle cx="20" cy="28" r="2"></circle>
+            <circle cx="40" cy="25" r="2"></circle>
+            <circle cx="60" cy="29" r="2"></circle>
+            <circle cx="80" cy="26" r="2"></circle>
+            <circle cx="100" cy="23" r="2"></circle>
+            <circle cx="120" cy="27" r="2"></circle>
+            <circle cx="140" cy="24" r="2"></circle>
+            <circle cx="160" cy="21" r="2"></circle>
+            <circle cx="180" cy="25" r="2"></circle>
+            <circle cx="200" cy="22" r="2"></circle>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-chart">
+    <div class="chart-header">
+      <div class="chart-title">
+        <h2>BTC/USD</h2>
+        <span class="timeframe">4H Chart</span>
+      </div>
+      <div class="chart-controls">
+        <button class="time-btn">1H</button>
+        <button class="time-btn active">4H</button>
+        <button class="time-btn">1D</button>
+        <button class="time-btn">1W</button>
+      </div>
+    </div>
+    <div class="chart-container">
+      <div class="chart-grid"></div>
+      <div class="chart-y-axis">
+        <span>42,900</span>
+        <span>42,800</span>
+        <span>42,700</span>
+        <span>42,600</span>
+        <span>42,500</span>
+      </div>
+      <div class="chart-x-axis">
+        <span>09:00</span>
+        <span>10:00</span>
+        <span>11:00</span>
+        <span>12:00</span>
+        <span>13:00</span>
+      </div>
+      <div class="chart-line">
+        <svg viewBox="0 0 1000 400" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:rgba(0,255,127,0.2)" />
+              <stop offset="100%" style="stop-color:rgba(0,255,127,0)" />
+            </linearGradient>
+          </defs>
+          <path class="chart-area" d="M0 300 L100 280 L200 320 L300 260 L400 290 L500 240 L600 270 L700 220 L800 250 L900 200 L1000 230 L1000 400 L0 400 Z"></path>
+          <path class="chart-stroke" d="M0 300 L100 280 L200 320 L300 260 L400 290 L500 240 L600 270 L700 220 L800 250 L900 200 L1000 230"></path>
+          <g class="price-points">
+            <circle cx="0" cy="300" r="4"></circle>
+            <circle cx="100" cy="280" r="4"></circle>
+            <circle cx="200" cy="320" r="4"></circle>
+            <circle cx="300" cy="260" r="4"></circle>
+            <circle cx="400" cy="290" r="4"></circle>
+            <circle cx="500" cy="240" r="4"></circle>
+            <circle cx="600" cy="270" r="4"></circle>
+            <circle cx="700" cy="220" r="4"></circle>
+            <circle cx="800" cy="250" r="4"></circle>
+            <circle cx="900" cy="200" r="4"></circle>
+            <circle cx="1000" cy="230" r="4"></circle>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="trading-panel">
+    <div class="order-types">
+      <button class="order-btn active">
+        <i class="fas fa-shopping-cart"></i>
+        Market
+      </button>
+      <button class="order-btn">
+        <i class="fas fa-file-invoice-dollar"></i>
+        Limit
+      </button>
+      <button class="order-btn">
+        <i class="fas fa-stop-circle"></i>
+        Stop
+      </button>
+    </div>
+
+    <div class="order-form">
+      <div class="form-group">
+        <label>Amount (BTC)</label>
+        <div class="input-group">
+          <input type="number" value="2" min="0" step="0.01">
+          <span class="max-btn">MAX</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Total (USD)</label>
+        <div class="input-group">
+          <input type="number" value="1" min="0" step="0.01">
+          <span class="currency">USD</span>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="buy-btn">
+          <i class="fas fa-arrow-up"></i>
+          Buy BTC
+        </button>
+        <button class="sell-btn">
+          <i class="fas fa-arrow-down"></i>
+          Sell BTC
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="market-news">
+    <h3>Market News</h3>
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-header">
+          <span class="news-time">14:30</span>
+          <span class="impact high">High Impact</span>
+        </div>
+        <p>Federal Reserve maintains interest rates, signals potential cuts in 2024</p>
+      </div>
+      <div class="news-item">
+        <div class="news-header">
+          <span class="news-time">12:15</span>
+          <span class="impact medium">Medium Impact</span>
+        </div>
+        <p>Bitcoin surpasses $42,000 as institutional demand grows</p>
+      </div>
+      <div class="news-item">
+        <div class="news-header">
+          <span class="news-time">10:45</span>
+          <span class="impact high">High Impact</span>
+        </div>
+        <p>European markets react to latest ECB policy decision</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
