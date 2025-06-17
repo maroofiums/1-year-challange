@@ -25,7 +25,7 @@
 - ✅ **Wednesday:** Supervised Learning (Regression, Classification)  
 - ✅ **Thursday:** React Basics (Components, Props, State)  
 - ✅ **Friday:** API Development (REST, JWT)  
-- ✅ **Saturday:** Mini Project: Blog System (Django + PHP)  
+- ✅ **Saturday:** Mini Project: like(Blog System, Chatbot)
 - 🚀 **Sunday:** Rest Day  
 
 ---
