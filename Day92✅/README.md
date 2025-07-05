@@ -1,12 +1,8 @@
 # Day 92
 
-Welcome to Day 92 of the 365 Days of Code Challenge!Here’s a complete `README.md` for your **PHP Authentication System (Sessions + JWT)** using `mysqli`, designed to work in local environments like **XAMPP**.
 
----
 
-## 📘 README.md
 
-```markdown
 # 🔐 PHP Authentication System (Sessions + JWT)
 
 A simple and secure user authentication system built using **PHP** and **MySQLi**, supporting both:
@@ -44,8 +40,7 @@ A simple and secure user authentication system built using **PHP** and **MySQLi*
 └── register.html              # Registration form
 
 
----
-
+```
 ## ⚙️ Setup Instructions
 
 ### 1. Requirements
