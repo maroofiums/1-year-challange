@@ -38,7 +38,7 @@
 - ✅ **Tuesday:** Django REST Framework (CRUD APIs)  
 - ✅ **Wednesday:** Neural Networks Basics (Perceptron, MLP)  
 - ✅ **Thursday:** React Router & GSAP Animations  
-- ✅ **Friday:** PostgreSQL Performance Optimization  
+- ✅ **Friday:**  SQL JOINS  
 - ✅ **Saturday:** Mini Project: ML Model Deployment  
 - 🚀 **Sunday:** Rest Day  
 
