@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>Titanic Predictor</title></head>
+<body>
+<h2>Predict Titanic Survival</h2>
+<form method="post">
+  {% csrf_token %}
+  <label>Pclass (1/2/3):</label><input type="number" name="pclass"><br>
+  <label>Sex (0=Male, 1=Female):</label><input type="number" name="sex"><br>
+  <label>Age:</label><input type="text" name="age"><br>
+  <label>Fare:</label><input type="text" name="fare"><br>
+  <button type="submit">Predict</button>
+</form>
+</body>
+</html>
