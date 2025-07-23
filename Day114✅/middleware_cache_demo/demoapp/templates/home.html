@@ -1,0 +1,17 @@
+{% load cache %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Middleware & Caching</title>
+</head>
+<body>
+    <h1>🕒 Current Time: {{ time }}</h1>
+
+    {% cache 30 sidebar %}
+        <div style="border: 1px solid black; padding: 10px;">
+            <h3>Sidebar (cached for 30s)</h3>
+            <p>Rendered at: {{ time }}</p>
+        </div>
+    {% endcache %}
+</body>
+</html>
