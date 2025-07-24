@@ -1,4 +1,4 @@
-# 1-year-challange
+# 1 year challange
 ---
 
 # **📌 Phase 1: Core Foundations (April - June)**
