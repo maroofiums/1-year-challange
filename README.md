@@ -29,8 +29,6 @@
 
 ---
 
----
-
 # **📌 Phase 2: Advanced ML, Django API & FastAPI (July - September)**
 
 **Goal:** Deep Learning, Django REST, FastAPI, React, and Databases.
