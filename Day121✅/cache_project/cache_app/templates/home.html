@@ -1,0 +1,23 @@
+{% load cache %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cache Demo</title>
+</head>
+<body>
+    <h1>Welcome to Cached Site</h1>
+
+    <!-- ✅ Template Fragment Cache -->
+    {% cache 120 some_section %}
+    <div>
+        <p>This section is cached for 2 minutes.</p>
+        <p>Time: {{ now|default:None }}</p>
+    </div>
+    {% endcache %}
+
+    {% if data %}
+    <hr>
+    <p><strong>Low-level Cache:</strong> {{ data.msg }}</p>
+    {% endif %}
+</body>
+</html>
