@@ -84,7 +84,7 @@
 * ✅ *Wednesday:* Model Optimization & Hyperparameter Tuning
 * ✅ *Thursday:* Advanced GSAP & UI Enhancements
 * ✅ *Friday:* MLOps Pipeline (CI/CD for ML & APIs)
-* ✅ *Saturday:* Project: Interactive Portfolio Website
+* ✅ *Saturday:* Project: ML Predictor Dashboard
 * 🚀 *Sunday:* Rest Day
 
 ---
