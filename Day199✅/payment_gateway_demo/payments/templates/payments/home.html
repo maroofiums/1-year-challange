@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Choose Payment Gateway</h2>
+<a href="{% url 'stripe_checkout' %}" id="stripe-btn">Pay with Stripe</a> <br><br>
+<a href="{% url 'razorpay_order' %}">Pay with Razorpay</a>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+document.getElementById("stripe-btn").addEventListener("click", function(e){
+    e.preventDefault();
+    fetch("{% url 'stripe_checkout' %}")
+      .then(res => res.json())
+      .then(data => {
+        const stripe = Stripe(data.publicKey);
+        stripe.redirectToCheckout({ sessionId: data.id });
+      });
+});
+</script>
+
+</body>
+</html>
