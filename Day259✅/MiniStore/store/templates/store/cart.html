@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4 text-center">🛒 Your Shopping Cart</h2>
+
+{% if items %}
+<table class="table table-bordered align-middle">
+  <thead class="table-dark">
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in items %}
+    <tr>
+      <td>{{ item.product.name }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>PKR {{ item.product.price }}</td>
+      <td>PKR {{ item.total_price }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="text-end">
+  <h4>Total: <span class="text-success">PKR {{ total }}</span></h4>
+  <a href="/checkout/" class="btn btn-success mt-3">Proceed to Checkout</a>
+</div>
+{% else %}
+<div class="text-center mt-5">
+  <h5>Your cart is empty 😕</h5>
+  <a href="/" class="btn btn-primary mt-3">Continue Shopping</a>
+</div>
+{% endif %}
+{% endblock %}
