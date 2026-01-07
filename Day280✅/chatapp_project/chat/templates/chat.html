@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+  {% csrf_token %}
+  <input type="text" name="user_text" placeholder="Say something..." required>
+  <button type="submit">Send</button>
+</form>
+
+{% if response %}
+  <p><b>Bot:</b> {{ response }}</p>
+{% endif %}
+
+</body>
+</html>
