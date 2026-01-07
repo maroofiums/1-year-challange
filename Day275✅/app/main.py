@@ -1,101 +1,46 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.responses import FileResponse
-import os
-from typing import List
-from utils import save_upload_file, extract_text_auto, simple_tag_extraction
+from fastapi import FastAPI,Depends,HTTPException
+from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError, jwt
 
 app = FastAPI()
 
-RESUMES = []
-UPLOAD_DIR = "uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
-
-
-@app.post("/resume/upload")
-async def upload_resume(
-    file: UploadFile = File(...),
-    uploaded_by: str | None = None
-):
-    # ---- FIX 1: Force filename to be string always ----
-    filename = str(file.filename)
-
-    if not filename:
-        raise HTTPException(status_code=400, detail="Invalid file name")
-
-    # Extract extension safely
-    filename = os.path.basename(filename)
-    base, extname = os.path.splitext(filename)
-
-    ext_lower = extname.lower()
-
-    allowed = {".pdf", ".docx", ".txt"}
-    if ext_lower not in allowed:
-        raise HTTPException(status_code=400, detail="Unsupported file type")
-
-    # ---- FIX 2: Prepare save path & handle duplicate names ----
-    save_path = os.path.join(UPLOAD_DIR, filename)
-
-    counter = 1
-    while os.path.exists(save_path):
-        filename = f"{base}_{counter}{extname}"
-        save_path = os.path.join(UPLOAD_DIR, filename)
-        counter += 1
-
-    # ---- FIX 3: Save file safely ----
-    await save_upload_file(file, save_path)
-
-    # ---- FIX 4: Extract resume content ----
-    text = extract_text_auto(save_path)
-    tags = simple_tag_extraction(text)
-
-    resume_obj = {
-        "id": len(RESUMES) + 1,
-        "filename": filename,
-        "file_path": save_path,
-        "uploaded_by": uploaded_by,
-        "tags": tags,
-        "content_preview": text[:200]
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+SECRET_KEY = "your_secret_key"
+ALGORITHM = "HS256"
+fake_users_db = {
+    "johndoe": {
+        "username": "johndoe",
+        "full_name": "John Doe",
+        "email": "johndoe@example.com",
+        "hashed_password": "fakehashedpassword",
+        "disabled": False,
     }
+}
 
-    RESUMES.append(resume_obj)
-    return resume_obj
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
 
+async def get_current_user(token: str = Depends(oauth2_scheme)):
+    credentials_exception = HTTPException(
+        status_code=401,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise credentials_exception
+    except JWTError:
+        raise credentials_exception
+    user = fake_users_db.get(username)
+    if user is None:
+        raise credentials_exception
+    return user
 
-@app.get("/resumes")
-def list_resumes() -> List[dict]:
-    return RESUMES
+@app.get("/users/me")
+async def read_users_me(current_user: dict = Depends(get_current_user)):
+    return current_user
 
-
-@app.get("/resumes/{resume_id}")
-def get_resume(resume_id: int):
-    for r in RESUMES:
-        if r["id"] == resume_id:
-            return r
-    raise HTTPException(status_code=404, detail="Resume not found")
-
-
-@app.delete("/resumes/{resume_id}")
-def delete_resume(resume_id: int):
-    global RESUMES
-
-    for r in RESUMES:
-        if r["id"] == resume_id:
-            try:
-                if os.path.exists(r["file_path"]):
-                    os.remove(r["file_path"])
-            except:
-                pass
-
-            RESUMES = [x for x in RESUMES if x["id"] != resume_id]
-            return {"detail": "deleted"}
-
-    raise HTTPException(status_code=404, detail="Resume not found")
-
-
-@app.get("/resumes/{resume_id}/download")
-def download(resume_id: int):
-    for r in RESUMES:
-        if r["id"] == resume_id:
-            return FileResponse(r["file_path"], filename=r["filename"])
-
-    raise HTTPException(status_code=404, detail="Resume not found")
