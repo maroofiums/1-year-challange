@@ -4,7 +4,7 @@
 
 ## *📌 Phase 1: Core Foundations (April - June)*
 
-*Goal:* Strengthen Django, PHP, Machine Learning, and Frontend skills.
+*Goal:* Strengthen Django, FastAPI, PHP, Machine Learning, and Frontend skills.
 
 ### *April 1 - April 7: Django Backend & Python Basics*
 
