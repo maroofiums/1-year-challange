@@ -115,7 +115,7 @@
 
 ### *February 1 - February 15: Portfolio & Resume*
 
-* ✅ *Monday:* Build a Personal Website
+* ✅ *Monday:* Make Neural Nework From Scratch
 * ✅ *Tuesday:* Add ML & Django/FastAPI Projects
 * ✅ *Wednesday:* SEO Optimization & Hosting
 * ✅ *Thursday:* JavaScript Micro-Interactions
