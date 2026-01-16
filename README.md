@@ -116,7 +116,7 @@
 ### *February 1 - February 15: Portfolio & Resume*
 
 * ✅ *Monday:* Make Neural Nework From Scratch
-* ✅ *Tuesday:* Add ML & Django/FastAPI Projects
+* ✅ *Tuesday:* FastAPI DataBase Integration
 * ✅ *Wednesday:* SEO Optimization & Hosting
 * ✅ *Thursday:* JavaScript Micro-Interactions
 * ✅ *Friday:* Docker & Kubernetes Final Deployment
