@@ -117,7 +117,7 @@
 
 * ✅ *Monday:* Make Neural Nework From Scratch
 * ✅ *Tuesday:* FastAPI DataBase Integration
-* ✅ *Wednesday:* SEO Optimization & Hosting
+* ✅ *Wednesday:* SQL Revision    
 * ✅ *Thursday:* JavaScript Micro-Interactions
 * ✅ *Friday:* Docker & Kubernetes Final Deployment
 * ✅ *Saturday:* Resume & GitHub Optimization
