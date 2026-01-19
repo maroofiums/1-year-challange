@@ -119,7 +119,7 @@
 * ✅ *Tuesday:* FastAPI DataBase Integration
 * ✅ *Wednesday:* SQL Revision    
 * ✅ *Thursday:* Django Revision  
-* ✅ *Friday:* Docker & Kubernetes Final Deployment
+* ✅ *Friday:* Docker & Kubernetes Deployment
 * ✅ *Saturday:* Resume & GitHub Optimization
 * 🚀 *Sunday:* Rest Day
 
