@@ -120,7 +120,7 @@
 * ✅ *Wednesday:* SQL Revision    
 * ✅ *Thursday:* Django Revision  
 * ✅ *Friday:* Docker & Kubernetes Deployment
-* ✅ *Saturday:* Resume & GitHub Optimization
+* ✅ *Saturday:* Learn GIT  
 * 🚀 *Sunday:* Rest Day
 
 ### *February 16 - March 15: Interview Preparation*
