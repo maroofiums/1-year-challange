@@ -129,7 +129,7 @@
 * ✅ *Tuesday:* Django Backend Interview Questions
 * ✅ *Wednesday:* API Security & Optimization
 * ✅ *Thursday:* Mock Technical Interviews
-* ✅ *Friday:* Real-World Project Debugging
+* ✅ *Friday:* ML Real-World Project 
 * ✅ *Saturday:* Portfolio Review & Adjustments
 * 🚀 *Sunday:* Rest Day
 
