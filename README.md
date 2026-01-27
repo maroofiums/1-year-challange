@@ -130,7 +130,7 @@
 * ✅ *Wednesday:* API Security & Optimization
 * ✅ *Thursday:* Mock Technical Interviews
 * ✅ *Friday:* ML Real-World Project 
-* ✅ *Saturday:* Portfolio Review & Adjustments
+* ✅ *Saturday:* deploy Project
 * 🚀 *Sunday:* Rest Day
 
 ### *March 16 - March 31: Final Review & Job Applications*
