@@ -133,11 +133,16 @@
 * ✅ *Saturday:* deploy Project
 * 🚀 *Sunday:* Rest Day
 
-### *March 16 - March 31: Final Review & Job Applications*
+### *March 16 - March 31: Industry Level*
 
-* ✅ *Apply for Jobs & Internships* 🚀
-* ✅ *Refine Portfolio & Submit Applications*
-* ✅ *Prepare for Live Interviews*
+* ✅ *Monday:* Solve 3 Leetcode Problem
+* ✅ *Tuesday:* Make & Deploy ML APIs
+* ✅ *Wednesday:* Use Pretrained ML Models
+* ✅ *Thursday:* GenAI
+* ✅ *Friday:* RAG System Bot
+* ✅ *Saturday:* FastAPI RAG Integration
+* 🚀 *Sunday:* Rest Day
+
 
 ---
 
