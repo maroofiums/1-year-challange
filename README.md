@@ -139,8 +139,8 @@
 * ✅ *Tuesday:* Make & Deploy ML APIs
 * ✅ *Wednesday:* Use Pretrained ML Models
 * ✅ *Thursday:* GenAI
-* ✅ *Friday:* RAG System Bot
-* ✅ *Saturday:* FastAPI RAG Integration
+* ✅ *Friday:* Big Data Basics
+* ✅ *Saturday:* Project Using ML/DL         
 * 🚀 *Sunday:* Rest Day
 
 
