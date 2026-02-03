@@ -139,8 +139,8 @@
 * ✅ *Tuesday:* Make & Deploy ML APIs
 * ✅ *Wednesday:* Use Pretrained ML Models
 * ✅ *Thursday:* GenAI
-* ✅ *Friday:* Big Data Basics
-* ✅ *Saturday:* Project Using ML/DL         
+* ✅ *Friday:* PyTorch For DataScience
+* ✅ *Saturday:* Big Data For DataScience 
 * 🚀 *Sunday:* Rest Day
 
 
