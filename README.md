@@ -99,7 +99,7 @@
 * ✅ *Tuesday:* Django WebSockets (Real-Time Data)
 * ✅ *Wednesday:* Q-Learning & Deep Q-Networks
 * ✅ *Thursday:* PyGame Basic
-* ✅ *Friday:* Kubernetes for Deployment
+* ✅ *Friday:* PySpark    
 * ✅ *Saturday:* Project: AI-Based Chatbot (Django + FastAPI)
 * 🚀 *Sunday:* Rest Day
 
