@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{% url 'add_student' %}" class="btn btn-primary mb-3">Add Student</a>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Marks</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.marks }}</td>
+            <td>
+                {% comment %} Grade badges with proper colors {% endcomment %}
+                <span class="badge
+                    {% if student.grade == 'F' %}
+                        bg-danger
+                    {% elif student.grade == 'D' or student.grade == 'C' %}
+                        bg-warning text-dark
+                    {% elif student.grade == 'B' %}
+                        bg-info
+                    {% elif student.grade == 'A' or student.grade == 'A+' %}
+                        bg-success
+                    {% else %}
+                        bg-secondary
+                    {% endif %}
+                ">
+                    {{ student.grade }}
+                </span>
+            </td>
+            <td>
+                <a href="{% url 'update_student' student.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'delete_student' student.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">No students found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
