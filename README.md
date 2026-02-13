@@ -106,7 +106,7 @@
 ### *January 16 - January 31: Final ML Project*
 
 * ✅ *Monday:* FastAPI Integration with ML Models
-* ✅ *Tuesday:* Django for ML APIs
+* ✅ *Tuesday:* Django Revision  
 * ✅ *Wednesday:* Data Collection & Cleaning
 * ✅ *Thursday:* React Revison
 * ✅ *Friday:* CI/CD for Full-Stack Projects
