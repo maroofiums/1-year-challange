@@ -106,7 +106,7 @@
 ### *January 16 - January 31: Final ML Project*
 
 * ✅ *Monday:* FastAPI Integration with ML Models
-* ✅ *Tuesday:* Django Revision  
+* ✅ *Tuesday:* Leetcode Patteern
 * ✅ *Wednesday:* Data Collection & Cleaning
 * ✅ *Thursday:* React Revison
 * ✅ *Friday:* CI/CD for Full-Stack Projects
