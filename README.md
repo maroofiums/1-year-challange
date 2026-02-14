@@ -107,7 +107,7 @@
 
 * ✅ *Monday:* FastAPI Integration with ML Models
 * ✅ *Tuesday:* Django Revision
-* ✅ *Wednesday:* Data Collection & Cleaning
+* ✅ *Wednesday:* TimeSeries Forcasting
 * ✅ *Thursday:* React Revison
 * ✅ *Friday:* CI/CD for Full-Stack Projects
 * ✅ *Saturday:* Project: Make Recommendation System
