@@ -120,7 +120,7 @@
 * ✅ *Wednesday:* SQL Revision    
 * ✅ *Thursday:* Django Revision  
 * ✅ *Friday:* CNN Architecture
-* ✅ *Saturday:* Learn GIT  
+* ✅ *Saturday:* Machine Learning Project  
 * 🚀 *Sunday:* Rest Day
 
 ### *February 16 - March 15: Interview Preparation*
