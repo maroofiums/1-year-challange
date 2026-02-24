@@ -119,7 +119,7 @@
 * ✅ *Tuesday:* FastAPI DataBase Integration
 * ✅ *Wednesday:* SQL Revision    
 * ✅ *Thursday:* Django Revision  
-* ✅ *Friday:* Docker & Kubernetes Deployment
+* ✅ *Friday:* CNN Architecture
 * ✅ *Saturday:* Learn GIT  
 * 🚀 *Sunday:* Rest Day
 
@@ -130,7 +130,7 @@
 * ✅ *Wednesday:* API Security & Optimization
 * ✅ *Thursday:* Mock Technical Interviews
 * ✅ *Friday:* ML Real-World Project 
-* ✅ *Saturday:* deploy Project
+* ✅ *Saturday:* Deploy Project
 * 🚀 *Sunday:* Rest Day
 
 ### *March 16 - March 31: Industry Level*
