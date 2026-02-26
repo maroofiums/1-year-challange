@@ -125,7 +125,7 @@
 
 ### *February 16 - March 15: Interview Preparation*
 
-* ✅ *Monday:* FastAPI & SQL System Design Questions
+* ✅ *Monday:* System Designing
 * ✅ *Tuesday:* Django Backend Interview Questions
 * ✅ *Wednesday:* API Security & Optimization
 * ✅ *Thursday:* Mock Technical Interviews
