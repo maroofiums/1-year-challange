@@ -127,7 +127,7 @@
 
 * ✅ *Monday:* System Designing
 * ✅ *Tuesday:* Django Backend Interview Questions
-* ✅ *Wednesday:* API Security & Optimization
+* ✅ *Wednesday:* FastAPI Projects
 * ✅ *Thursday:* Mock Technical Interviews
 * ✅ *Friday:* ML Real-World Project 
 * ✅ *Saturday:* Deploy Project
