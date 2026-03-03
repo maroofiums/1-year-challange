@@ -130,7 +130,7 @@
 * ✅ *Wednesday:* FastAPI Projects
 * ✅ *Thursday:* Mock Technical Interviews
 * ✅ *Friday:* ML Real-World Project 
-* ✅ *Saturday:* Deploy Project
+* ✅ *Saturday:* Streamlit Revision
 * 🚀 *Sunday:* Rest Day
 
 ### *March 16 - March 31: Industry Level*
