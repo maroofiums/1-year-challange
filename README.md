@@ -138,7 +138,7 @@
 * ✅ *Monday:* Solve 3 Leetcode Problem
 * ✅ *Tuesday:* Make & Deploy ML APIs
 * ✅ *Wednesday:* Use Pretrained ML Models
-* ✅ *Thursday:* GenAI
+* ✅ *Thursday:* GenAI For DataScience
 * ✅ *Friday:* PyTorch For DataScience
 * ✅ *Saturday:* Big Data For DataScience 
 * 🚀 *Sunday:* Rest Day
@@ -150,7 +150,7 @@
 
 ✔ *Master Django & FastAPI Backend Development*<br>
 ✔ *Build & Deploy Full-Stack Web Apps (Django + FastAPI + React)*<br>
-✔ *Become Proficient in Machine Learning & MLOps*<br>
+✔ *Become Proficient in Machine Learning,Deep Learning, Generative AI & MLOps*<br>
 ✔ *Develop & Deploy Real-World Projects*<br>
 ✔ *Be Job-Ready with a Strong Portfolio*<br>
 
