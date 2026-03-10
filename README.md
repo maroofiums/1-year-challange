@@ -140,7 +140,7 @@
 * ✅ *Wednesday:* Use Pretrained ML Models
 * ✅ *Thursday:* GenAI For DataScience
 * ✅ *Friday:* PyTorch For DataScience
-* ✅ *Saturday:* Big Data For DataScience 
+* ✅ *Saturday:* Mathematics For DataScience 
 * 🚀 *Sunday:* Rest Day
 
 
