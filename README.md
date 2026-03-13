@@ -96,7 +96,7 @@
 ### *January 1 - January 15: Reinforcement Learning*
 
 * ✅ *Monday:* FastAPI Security & OAuth2
-* ✅ *Tuesday:* Django WebSockets (Real-Time Data)
+* ✅ *Tuesday:* Django Revision
 * ✅ *Wednesday:* Q-Learning & Deep Q-Networks
 * ✅ *Thursday:* PyGame Basic
 * ✅ *Friday:* PySpark    
@@ -106,7 +106,7 @@
 ### *January 16 - January 31: Final ML Project*
 
 * ✅ *Monday:* FastAPI Integration with ML Models
-* ✅ *Tuesday:* Django Revision
+* ✅ *Tuesday:* Django WebSockets (Real-Time Data)
 * ✅ *Wednesday:* TimeSeries Forcasting
 * ✅ *Thursday:* React Revison
 * ✅ *Friday:* CI/CD for Full-Stack Projects
