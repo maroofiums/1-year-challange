@@ -99,7 +99,7 @@
 * ✅ *Tuesday:* Django Revision
 * ✅ *Wednesday:* Q-Learning & Deep Q-Networks
 * ✅ *Thursday:* PyGame Basic
-* ✅ *Friday:* PySpark    
+* ✅ *Friday:* FastAPI CRUD    
 * ✅ *Saturday:* Project: AI-Based Chatbot (Django + FastAPI)
 * 🚀 *Sunday:* Rest Day
 
