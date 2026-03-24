@@ -110,7 +110,7 @@
 * ✅ *Wednesday:* TimeSeries Forcasting
 * ✅ *Thursday:* React Revison
 * ✅ *Friday:* CI/CD for Full-Stack Projects
-* ✅ *Saturday:* Project: Make Recommendation System
+* ✅ *Saturday:* Project: Machine Learning Project
 * 🚀 *Sunday:* Rest Day
 
 ### *February 1 - February 15: Portfolio & Resume*
